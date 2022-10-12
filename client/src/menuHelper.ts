@@ -1,4 +1,5 @@
 import { AthenaClient } from '@AthenaClient/api/athena';
+import { WebViewController } from '@AthenaClient/extensions/view2';
 import * as alt from 'alt-client';
 let openedMenuCount: number;
 
@@ -28,6 +29,7 @@ export class MenuHelper {
             alt.toggleGameControls(true);
             AthenaClient.webview.unfocus();
             AthenaClient.webview.showCursor(false);
+            WebViewController.setOverlaysVisible(true);
             alt.Player.local.isMenuOpen = false;
         }
     }
