@@ -37,8 +37,6 @@ git clone https://github.com/jonasesser/athena-multiview-test.git
 
 -> The left pages closes, the other will be refreshed and the timer starts again from 0 seconds
 
-3. Optional: Close the second page by open Inventory first
-
 Expected behaviour:
 
 1. Page on the right side does not refresh
@@ -52,8 +50,6 @@ Chat will be unusable if opened it while a page is opened
 
 2. Close the first page
 
-3. Open chat again -> chat not opens but cursor back
+3. Close second page
 
-4. Close second page
-
-5. Open chat again -> No game controls anymore -> Reconnect!
+4. Open chat again -> No game controls anymore -> Reconnect!

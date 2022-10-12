@@ -3,11 +3,13 @@ import { disableAllControls } from '@AthenaClient/utility/disableControls';
 import * as alt from 'alt-client';
 import { AthenaClient } from '../../../../client/api/athena';
 import { ExampleWebViewEvents } from '../../shared/viewInfo';
+import { MenuHelper } from './menuHelper';
 
 let players1: alt.Player[];
 
 export class MultitestView1 {
     static init() {}
+
     /**
      * Opens the WebView.
      * The function call is from the server-side.
@@ -27,11 +29,7 @@ export class MultitestView1 {
         AthenaClient.webview.ready(ExampleWebViewEvents.ViewName1, MultitestView1.ready);
         // AthenaClient.webview.open([ExampleWebViewEvents.ViewName1], true, MultitestView1.close);
         AthenaClient.webview.open([ExampleWebViewEvents.ViewName1]);
-        // WebViewController.openPages([ExampleWebViewEvents.ViewName1]);
-
-        AthenaClient.webview.focus();
-        AthenaClient.webview.showCursor(true);
-        alt.toggleGameControls(false);
+        MenuHelper.openMenu();
     }
 
     /**
@@ -54,21 +52,10 @@ export class MultitestView1 {
     static close() {
         players1 = undefined;
 
-        alt.toggleGameControls(true);
-
-        //TODO: Workaround if chat was opened
-        alt.Player.local.isChatOpen = false;
-        disableAllControls(false);
-
-        //TODO Off not exist anymore?
-        // AthenaClient.webview.off(ExampleWebViewEvents.ClientServer1.CLOSE);
-        WebViewController.off(ExampleWebViewEvents.ClientServer1.CLOSE, MultitestView1.close);
+        MenuHelper.closeMenu();
 
         //TODO How to close multiple pages with AthenaClient.webview?
         WebViewController.closePages([ExampleWebViewEvents.ViewName1]);
-
-        AthenaClient.webview.unfocus();
-        AthenaClient.webview.showCursor(false);
     }
 }
 

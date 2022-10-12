@@ -3,6 +3,7 @@ import { disableAllControls } from '@AthenaClient/utility/disableControls';
 import * as alt from 'alt-client';
 import { AthenaClient } from '../../../../client/api/athena';
 import { ExampleWebViewEvents } from '../../shared/viewInfo';
+import { MenuHelper } from './menuHelper';
 
 let players2: alt.Player[];
 
@@ -29,9 +30,7 @@ export class MultitestView2 {
         AthenaClient.webview.ready(ExampleWebViewEvents.ViewName2, MultitestView2.ready);
         // AthenaClient.webview.open([ExampleWebViewEvents.ViewName2], true, MultitestView2.close);
         AthenaClient.webview.open([ExampleWebViewEvents.ViewName2]);
-        AthenaClient.webview.focus();
-        AthenaClient.webview.showCursor(true);
-        alt.toggleGameControls(false);
+        MenuHelper.openMenu();
     }
 
     /**
@@ -53,20 +52,12 @@ export class MultitestView2 {
      */
     static close() {
         players2 = undefined;
-        //TODO: must toggle Game Controls before close page?
-        alt.toggleGameControls(true);
 
-        //TODO: Workaround if chat was opened
-        alt.Player.local.isChatOpen = false;
-        disableAllControls(false);
+        MenuHelper.closeMenu();
 
         WebViewController.off(ExampleWebViewEvents.ClientServer1.CLOSE, MultitestView2.close);
         //TODO How to close multiple page with AthenaClient.webview?
-
         WebViewController.closePages([ExampleWebViewEvents.ViewName2]);
-
-        AthenaClient.webview.unfocus();
-        AthenaClient.webview.showCursor(false);
     }
 }
 
