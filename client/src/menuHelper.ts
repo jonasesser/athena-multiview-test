@@ -13,6 +13,7 @@ export class MenuHelper {
 
     static openMenu() {
         openedMenuCount++;
+        alt.log('Open menu, count: ' + openedMenuCount);
         AthenaClient.webview.focus();
         AthenaClient.webview.showCursor(true);
         alt.toggleGameControls(false);
@@ -21,7 +22,9 @@ export class MenuHelper {
 
     static closeMenu() {
         openedMenuCount--;
+        alt.log('Close menu, count: ' + openedMenuCount);
         if (!MenuHelper.isMenuOpened()) {
+            alt.log('Close last menu');
             alt.toggleGameControls(true);
             AthenaClient.webview.unfocus();
             AthenaClient.webview.showCursor(false);
